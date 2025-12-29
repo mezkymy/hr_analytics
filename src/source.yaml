@@ -1,0 +1,25 @@
+version: 2
+
+sources:
+  - name: raw_data
+    database: AE_TEST_CASE 
+    schema: RAW_DATA
+    tables:
+      - name: daftar_pegawai
+        description: Semua pegawai yang bekerja.
+        columns:
+          - name: nik_karyawan
+            description: Nomor Induk Karyawan yang merupakan identitas unik setiap pekerja.
+            data_type: varchar
+          - name: perusahaan
+            description: Nama entitas perusahaan atau anak perusahaan tempat karyawan terdaftar.
+            data_type: varchar
+          - name: hire_date
+            description: Tanggal resmi karyawan mulai bekerja di perusahaan.
+            data_type: date
+          - name: termination_date
+            description: Tanggal berakhirnya hubungan kerja karyawan, baik yang akan berakhir maupun yang telah berakhir.
+            data_type: date
+          - name: status
+            description: Status keaktifan karyawan.
+            data_type: varchar
