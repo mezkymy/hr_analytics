@@ -1,0 +1,70 @@
+
+version: 2
+
+seeds:
+  - name: DAFTAR_PEGAWAI # Name of the CSV file without the .csv extension
+    config:
+      column_types:
+        NIK_KARYAWAN: varchar
+        PERUSAHAAN: varchar
+        HIRE_DATE: date
+        TERMINATION_DATE: date
+        STATUS: varchar
+
+models:
+  - name: staging
+    description: Semua pegawai yang bekerja (dari sumber data DAFTAR_PEGAWAI.csv)
+    columns:
+      - name: nik_karyawan
+        description: Nomor Induk Karyawan yang merupakan identitas unik setiap pekerja.
+        data_type: varchar
+      - name: perusahaan
+        description: Nama entitas perusahaan atau anak perusahaan tempat karyawan terdaftar.
+        data_type: varchar
+      - name: hire_date
+        description: Tanggal resmi karyawan mulai bekerja di perusahaan.
+        data_type: date
+      - name: termination_date
+        description: Tanggal berakhirnya hubungan kerja karyawan, baik yang akan berakhir maupun yang telah berakhir.
+        data_type: date
+      - name: status
+        description: Status keaktifan karyawan.
+        data_type: varchar
+
+  # - name: intermediate
+  #   description: "Intermediate model based on staging"
+  #   columns:
+  #     - name: id
+  #       description: "The primary key for this table"
+  #       data_tests:
+  #         - unique
+  #         - not_null
+  
+  - name: mart_hc_change
+    description: Semua pegawai yang bekerja (dari sumber data DAFTAR_PEGAWAI.csv)
+    columns:
+      - name: tanggal
+        description: periode bulan ditulis dalam format tanggal di ISO 8601 dan selalu ditulis sebagai awal bulan
+        data_type: date
+      - name: num_resign
+        description: jumlah pegawai yang resign, ditulis sebagai bilangan negatif
+        data_type: integer(64)
+      - name: num_new_hires
+        description: jumlah pegawai baru, ditulis sebagai bilangan positif
+        data_type: integer(64)
+      - name: cum_change
+        description: jumlah pegawai pada bulan tersebut setelah menghitung num_resign dan num_new_hires
+        data_type: integer(64)
+      - name: net_change
+        description: hasil kalkulasi num_resign dan num_new_hires
+        data_type: integer(64)
+      - name: bouncing_hires
+        description: jumlah orang yang resign pada bulan yang sama saat direkrut
+        data_type: integer(64)
+      - name: prev_cum_change
+        description: nilai cum_change pada bulan sebelumnya
+        data_type: integer(64)
+      - name: dim
+        description: kategorisasi periode waktu
+        data_type: varchar
+

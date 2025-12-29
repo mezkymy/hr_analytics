@@ -1,9 +1,9 @@
 version: 2
 
 sources:
-  - name: raw_data
-    database: AE_TEST_CASE 
-    schema: RAW_DATA
+  - name: data
+    database: data 
+    schema: test_data
     tables:
       - name: daftar_pegawai
         description: Semua pegawai yang bekerja.
