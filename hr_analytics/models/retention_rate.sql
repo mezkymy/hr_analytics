@@ -1,6 +1,6 @@
 with hc_change as (
     select *
-    from {{ ref('mart_hc_change') }}
+    from {{ ref('hc_change') }}
 ),
 
 retention as (

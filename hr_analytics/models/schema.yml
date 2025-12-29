@@ -40,7 +40,7 @@ models:
   #         - unique
   #         - not_null
   
-  - name: mart_hc_change
+  - name: hc_change
     description: Semua pegawai yang bekerja (dari sumber data DAFTAR_PEGAWAI.csv)
     columns:
       - name: tanggal
